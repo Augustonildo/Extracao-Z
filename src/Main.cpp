@@ -1,6 +1,6 @@
-#include <iostream>
+#include "Base.hpp"
 
 int main() {
-    std::cout << "Iniciando aplicação " << std::endl;
+    cout << "Iniciando aplicação " << endl;
     return 0;
 }

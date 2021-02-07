@@ -1,13 +1,24 @@
 #include "Robo.hpp"
 
 Robo::Robo(){
-    indAtivo = false;
-    posicaoAtualX = 0;
-    posicaoAtualY = 0;
-    recursosColetados = 0;
-    hostisEliminados = 0;
-    historico = "";
-    filaComandos = FilaEncadeadaComandos();
+    this->indAtivo = false;
+    this->posicaoAtualX = 0;
+    this->posicaoAtualY = 0;
+    this->recursosColetados = 0;
+    this->hostisEliminados = 0;
+    this->historico = "";
+    this->filaComandos = FilaEncadeadaComandos();
+}
+
+Robo::Robo(int id){
+    this->id = id;
+    this->indAtivo = false;
+    this->posicaoAtualX = 0;
+    this->posicaoAtualY = 0;
+    this->recursosColetados = 0;
+    this->hostisEliminados = 0;
+    this->historico = "";
+    this->filaComandos = FilaEncadeadaComandos();
 }
 
 void Robo::AdicionarOrdemComando(bool prioridade, Comando comando){

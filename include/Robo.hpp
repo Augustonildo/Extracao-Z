@@ -1,13 +1,10 @@
 #include "FilaEncadeadaComandos.hpp"
-#include <iostream>
-
-using namespace std;
 
 class Robo 
 {
     public:
         Robo();
-        ~Robo();
+        Robo(int id);
         void AdicionarOrdemComando(bool prioridade, Comando comando);
 
     private:

@@ -4,7 +4,6 @@ class CelulaComando
 {
     public:
         CelulaComando();
-        ~CelulaComando();
     private:
         Comando item;
         CelulaComando *prox;

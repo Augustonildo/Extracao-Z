@@ -1,37 +1,38 @@
 #include "Base.hpp"
-#include "Comando.hpp"
-using namespace std;
 
 Base::Base(){
+    for(int i = 0; i < 50; i++){
+        robos[i] = Robo(i);
+    }
     contadorBaseAliens = 0;
     contadorBaseRecursos = 0;
 }
 
 void Base::Ativar(int k){
-    if(robos[k]->indAtivo){
+    if(robos[k].indAtivo){
         cout << "BASE: ROBO " << k << " JA ESTA EM MISSAO";
         return;
     }
 
     cout << "BASE: ROBO " << k << " SAIU EM MISSAO";
-    robos[k]->indAtivo = true;
+    robos[k].indAtivo = true;
 }
 
 void Base::Executar(int k){
     Comando comando;
-    while(!robos[k]->filaComandos.FilaVazia()){
-        comando = robos[k].filaComandos.ExecutaComando();
+    while(!robos[k].filaComandos.FilaVazia()){
+        comando = robos[k].filaComandos.RemoveComando();
 
         switch (comando.tipoComando)
         {
             case Mover:
-                robos[k].Mover(comando.x, comando.y);
+                robos[k].Mover(mapa, comando.x, comando.y);
                 break;
             case Coletar:
-                robos[k].Coletar();
+                robos[k].Coletar(mapa);
                 break;
             case Eliminar:
-                robos[k].Eliminar();
+                robos[k].Eliminar(mapa);
                 break;
             
             default:
@@ -46,7 +47,7 @@ void Base::Relatorio(int k){
 }
 
 void Base::Retornar(int k){
-    if(!robos[k]->indAtivo){
+    if(!robos[k].indAtivo){
         cout << "BASE: ROBO " + to_string(k) + " NAO ESTA EM MISSAO\n";
         return;
     }
