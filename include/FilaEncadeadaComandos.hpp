@@ -8,9 +8,10 @@ class FilaEncadeadaComandos
     public:
         FilaEncadeadaComandos();
         ~FilaEncadeadaComandos();
-        void InsereComando();
-        void InsereComandoPrioritario();
-        Comando RemoveComando();
+        void InsereComando(Comando comando);
+        void InsereComandoPrioritario(Comando comando);
+        Comando ExecutaComando();
+        bool FilaVazia();
 
     private:
         CelulaComando *primeiro;

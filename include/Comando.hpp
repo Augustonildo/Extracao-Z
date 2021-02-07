@@ -1,15 +1,27 @@
 #include <iostream>
 using namespace std;
 
+enum class TipoComando{
+    Mover,
+    Coletar,
+    Eliminar,
+    Ativar,
+    Executar,
+    Relatorio,
+    Retornar
+};
+
 class Comando 
 {
     public:
-        Comando(string nomeComando);
-        Comando(string nomeComando, int x, int y);
-        ~Comando();
+        Comando();
+        Comando(TipoComando tipoComando);
+        Comando(TipoComando tipoComando, int x, int y);
 
     private:
-        string nomeComando;
+        TipoComando tipoComando;
         int x;
         int y;
+
+    friend class Base;
 };

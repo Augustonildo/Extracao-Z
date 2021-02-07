@@ -1,4 +1,3 @@
-#include "Comando.hpp"
 #include "FilaEncadeadaComandos.hpp"
 #include <iostream>
 
@@ -10,25 +9,19 @@ class Robo
         Robo();
         ~Robo();
         void AdicionarOrdemComando(bool prioridade, Comando comando);
-        void Ativar();
-        void Executar();
-        void Relatorio();
-        void Retornar();
-        bool GetIndAtivo();
 
     private:
+        int id;
         bool indAtivo;
         int posicaoAtualX;
         int posicaoAtualY;
         int recursosColetados;
         int hostisEliminados;
-        string historico[];
+        string historico;
         FilaEncadeadaComandos filaComandos;
         void Mover(int x,int y);
-        //Retorna 1 para sucesso e -1 para caso não hajam hostis
-        int Eliminar();
-        //Retorna 1 para sucesso e -1 para caso não hajam recursos
-        int Coletar();
+        void Eliminar();
+        void Coletar();
 
-    friend class Mapa;
+    friend class Base;
 };
