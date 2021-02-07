@@ -1,7 +1,4 @@
 #include "CelulaComando.hpp"
-#include <iostream>
-
-using namespace std;
 
 class FilaEncadeadaComandos 
 {
@@ -10,10 +7,11 @@ class FilaEncadeadaComandos
         ~FilaEncadeadaComandos();
         void InsereComando(Comando comando);
         void InsereComandoPrioritario(Comando comando);
-        Comando ExecutaComando();
+        Comando RemoveComando();
         bool FilaVazia();
 
     private:
-        CelulaComando *primeiro;
-        CelulaComando *ultimo;
+        void Limpa();
+        CelulaComando *frente;
+        CelulaComando *tras;
 };
