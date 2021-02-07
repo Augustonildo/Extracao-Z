@@ -13,7 +13,7 @@ class Base
     
     private:
         Robo robos[50];
-        Mapa mapa;
+        char **mapa;
         int contadorBaseAliens;
         int contadorBaseRecursos;
 };
