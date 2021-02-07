@@ -1,12 +1,15 @@
 #include "Base.hpp"
 
-Base::Base(){
+Base::Base(char **mapa){
     for(int i = 0; i < 50; i++){
-        robos[i] = Robo(i);
+        this->robos[i] = Robo(i);
     }
-    contadorBaseAliens = 0;
-    contadorBaseRecursos = 0;
+    this->mapa = mapa;
+    this->contadorBaseAliens = 0;
+    this->contadorBaseRecursos = 0;
 }
+
+Base::~Base(){}
 
 void Base::Ativar(int k){
     if(robos[k].indAtivo){
@@ -48,11 +51,11 @@ void Base::Relatorio(int k){
 
 void Base::Retornar(int k){
     if(!robos[k].indAtivo){
-        cout << "BASE: ROBO " + to_string(k) + " NAO ESTA EM MISSAO\n";
+        cout << "BASE: ROBO " << k << " NAO ESTA EM MISSAO\n";
         return;
     }
-    cout << "BASE: ROBO " + to_string(k) + " RETORNOU ALIENS " + to_string(robos[k].hostisEliminados) 
-        + " RECURSOS " + to_string(robos[k].recursosColetados);
+    cout << "BASE: ROBO " << k << " RETORNOU ALIENS " << robos[k].hostisEliminados
+        << " RECURSOS " << robos[k].recursosColetados;
     contadorBaseAliens += robos[k].hostisEliminados;
     contadorBaseRecursos += robos[k].recursosColetados;
     robos[k].Limpar();

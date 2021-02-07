@@ -1,4 +1,11 @@
 #include "Robo.hpp"
+#include <sstream>
+
+string int_to_string(int i){
+    ostringstream sstr;
+    sstr << i;
+    return sstr.str();
+}
 
 Robo::Robo(){
     this->indAtivo = false;
@@ -32,39 +39,39 @@ void Robo::AdicionarOrdemComando(bool prioridade, Comando comando){
 
 void Robo::Mover(char **mapa, int x, int y){
     if(mapa[x][y] != 'O'){
-        historico = historico + "ROBO: " + to_string(id) + " IMPOSSIVEL MOVER PARA (" +
-            to_string(posicaoAtualX) + "," + to_string(posicaoAtualY) + ")\n";
+        historico = historico + "ROBO: " + int_to_string(id) + " IMPOSSIVEL MOVER PARA (" +
+            int_to_string(posicaoAtualX) + "," + int_to_string(posicaoAtualY) + ")\n";
         return;
     }
 
-    historico = historico + "ROBO: " + to_string(id) + " MOVEU PARA (" + 
-        to_string(posicaoAtualX) + "," + to_string(posicaoAtualY) + ")\n";
+    historico = historico + "ROBO: " + int_to_string(id) + " MOVEU PARA (" + 
+        int_to_string(posicaoAtualX) + "," + int_to_string(posicaoAtualY) + ")\n";
     posicaoAtualX = x;
     posicaoAtualY = y;
 }
 
 void Robo::Eliminar(char **mapa){
     if(mapa[posicaoAtualX][posicaoAtualY] != 'H'){
-        historico = historico + "ROBO: " + to_string(id) + " IMPOSSIVEL ELIMINAR ALIEN EM ("
-            + to_string(posicaoAtualX) + "," + to_string(posicaoAtualY) + ")\n";
+        historico = historico + "ROBO: " + int_to_string(id) + " IMPOSSIVEL ELIMINAR ALIEN EM ("
+            + int_to_string(posicaoAtualX) + "," + int_to_string(posicaoAtualY) + ")\n";
     }
 
     hostisEliminados++;
     mapa[posicaoAtualX][posicaoAtualY] = '.';
-    historico = historico + "ROBO: " + to_string(id) + " ALIEN ELIMINADO EM ("
-        + to_string(posicaoAtualX) + "," + to_string(posicaoAtualY) + ")\n";
+    historico = historico + "ROBO: " + int_to_string(id) + " ALIEN ELIMINADO EM ("
+        + int_to_string(posicaoAtualX) + "," + int_to_string(posicaoAtualY) + ")\n";
 }
 
 void Robo::Coletar(char **mapa){
     if(mapa[posicaoAtualX][posicaoAtualY] != 'R'){
-        historico = historico + "ROBO: " + to_string(id) + " IMPOSSIVEL COLETAR RECURSOS EM ("
-            + to_string(posicaoAtualX) + "," + to_string(posicaoAtualY) + ")\n";
+        historico = historico + "ROBO: " + int_to_string(id) + " IMPOSSIVEL COLETAR RECURSOS EM ("
+            + int_to_string(posicaoAtualX) + "," + int_to_string(posicaoAtualY) + ")\n";
     }
 
     recursosColetados++;
     mapa[posicaoAtualX][posicaoAtualY] = '.';
-    historico = historico + "ROBO: " + to_string(id) + " RECURSOS COLETADOS EM ("
-        + to_string(posicaoAtualX) + "," + to_string(posicaoAtualY) + ")\n";
+    historico = historico + "ROBO: " + int_to_string(id) + " RECURSOS COLETADOS EM ("
+        + int_to_string(posicaoAtualX) + "," + int_to_string(posicaoAtualY) + ")\n";
 }
 
 void Robo::Limpar(){
