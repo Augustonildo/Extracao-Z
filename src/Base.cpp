@@ -11,6 +11,10 @@ Base::Base(char **mapa){
 
 Base::~Base(){}
 
+Robo Base::GetRobo(int k){
+    return robos[k];
+}
+
 void Base::Ativar(int k){
     if(robos[k].indAtivo){
         cout << "BASE: ROBO " << k << " JA ESTA EM MISSAO";
