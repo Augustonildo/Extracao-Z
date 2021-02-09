@@ -41,16 +41,15 @@ void Robo::AdicionarOrdemComando(bool prioridade, Comando comando){
 }
 
 void Robo::Mover(char **mapa, int x, int y){
-    if(mapa[x][y] != 'O'){
+    if(mapa[x][y] == 'O'){
         historico = historico + "ROBO: " + int_to_string(id) + " IMPOSSIVEL MOVER PARA (" +
-            int_to_string(posicaoAtualX) + "," + int_to_string(posicaoAtualY) + ")\n";
+            int_to_string(x) + "," + int_to_string(y) + ")\n";
         return;
     }
-
-    historico = historico + "ROBO: " + int_to_string(id) + " MOVEU PARA (" + 
-        int_to_string(posicaoAtualX) + "," + int_to_string(posicaoAtualY) + ")\n";
     posicaoAtualX = x;
     posicaoAtualY = y;
+    historico = historico + "ROBO: " + int_to_string(id) + " MOVEU PARA (" + 
+        int_to_string(x) + "," + int_to_string(y) + ")\n";
 }
 
 void Robo::Eliminar(char **mapa){
