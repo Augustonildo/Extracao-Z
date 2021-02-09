@@ -6,7 +6,7 @@ class Base
         Base();
         Base(char **mapa);
         ~Base();
-        Robo GetRobo(int k);
+        Robo* GetRobo(int k);
         void Ativar(int k);
         void Executar(int k);
         void Relatorio(int k);

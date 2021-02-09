@@ -33,7 +33,6 @@ void Robo::AdicionarOrdemComando(bool prioridade, Comando comando){
         filaComandos.InsereComandoPrioritario(comando);
         return;
     }
-
     filaComandos.InsereComando(comando);
 }
 

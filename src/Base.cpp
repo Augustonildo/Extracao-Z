@@ -11,17 +11,17 @@ Base::Base(char **mapa){
 
 Base::~Base(){}
 
-Robo Base::GetRobo(int k){
-    return robos[k];
+Robo* Base::GetRobo(int k){
+    return &robos[k];
 }
 
 void Base::Ativar(int k){
     if(robos[k].indAtivo){
-        cout << "BASE: ROBO " << k << " JA ESTA EM MISSAO";
+        cout << "BASE: ROBO " << k << " JA ESTA EM MISSAO" << endl;
         return;
     }
 
-    cout << "BASE: ROBO " << k << " SAIU EM MISSAO";
+    cout << "BASE: ROBO " << k << " SAIU EM MISSAO" << endl;
     robos[k].indAtivo = true;
 }
 
@@ -29,7 +29,6 @@ void Base::Executar(int k){
     Comando comando;
     while(!robos[k].filaComandos.FilaVazia()){
         comando = robos[k].filaComandos.RemoveComando();
-
         switch (comando.tipoComando)
         {
             case Mover:
@@ -41,7 +40,6 @@ void Base::Executar(int k){
             case Eliminar:
                 robos[k].Eliminar(mapa);
                 break;
-            
             default:
                 throw "Erro! Comando desconhecido";
                 break;
@@ -55,11 +53,11 @@ void Base::Relatorio(int k){
 
 void Base::Retornar(int k){
     if(!robos[k].indAtivo){
-        cout << "BASE: ROBO " << k << " NAO ESTA EM MISSAO\n";
+        cout << "BASE: ROBO " << k << " NAO ESTA EM MISSAO" << endl;
         return;
     }
     cout << "BASE: ROBO " << k << " RETORNOU ALIENS " << robos[k].hostisEliminados
-        << " RECURSOS " << robos[k].recursosColetados;
+        << " RECURSOS " << robos[k].recursosColetados << endl;
     contadorBaseAliens += robos[k].hostisEliminados;
     contadorBaseRecursos += robos[k].recursosColetados;
     robos[k].Limpar();

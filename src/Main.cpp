@@ -4,17 +4,15 @@
 
 int main() {
     istringstream stream;
-    fstream arqMapa("mapa.txt"); 
+    ifstream arqMapa("mapa.txt"); 
     string linha_mapa = "";
     char **mapa;
     int tamanhoX, tamanhoY;
 
     if(arqMapa.is_open()){
         getline(arqMapa, linha_mapa);
-        
-        //TODO: tamanhoX = linha_mapa; tamanhoY = linha_mapa
-        tamanhoX = 2;
-        tamanhoY = 2;
+        stream = istringstream(linha_mapa);
+        stream >> tamanhoX >> tamanhoY;
 
         mapa = (char **) malloc(tamanhoX * sizeof(char*));
         for(int i = 0; i < tamanhoX; i++){
@@ -28,13 +26,13 @@ int main() {
             }
             linhaArquivo++;
         }
-    }else{
+        arqMapa.close();
+    } else {
         throw "Erro! Arquivo mapa.txt não foi encontrado";
     }
-    arqMapa.close();
     Base base = Base(mapa);
 
-    fstream arqComandos("comandos.txt");
+    ifstream arqComandos("comandos.txt");
     string linha_comandos;
     
     if(arqComandos.is_open()){
@@ -60,22 +58,24 @@ int main() {
                 base.Retornar(atoi(idRobo.c_str()));
             }else if(nomeComando == "COLETAR"){
                 base.GetRobo(atoi(idRobo.c_str()))
-                    .AdicionarOrdemComando(comandoPrioritario, Coletar);
+                    ->AdicionarOrdemComando(comandoPrioritario, Comando(Coletar));
             }else if(nomeComando == "ELIMINAR"){
                 base.GetRobo(atoi(idRobo.c_str()))
-                    .AdicionarOrdemComando(comandoPrioritario, Eliminar);
+                    ->AdicionarOrdemComando(comandoPrioritario, Comando(Eliminar));
             }else if(nomeComando == "MOVER"){
-                //TODO GET X,Y
-                base.GetRobo(atoi(idRobo.c_str()))
-                    .AdicionarOrdemComando(comandoPrioritario, Comando(Mover, 0, 0));
+                string x, y;
+                stream.ignore(2);
+                getline(stream, x, ',');
+                getline(stream, y, ')');
+                base.GetRobo(atoi(idRobo.c_str()))->AdicionarOrdemComando
+                    (comandoPrioritario, Comando(Mover, atoi(x.c_str()), atoi(y.c_str())));
             }else{
                 throw "Erro! Comando desconhecido";
             }
         }
+        arqComandos.close();
     }else{
         throw "Erro! Arquivo comandos.txt não foi encontrado";
     }
-    arqComandos.close();
-    
     return 0;
 }
