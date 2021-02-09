@@ -4,7 +4,7 @@ class Base
 {
     public:
         Base();
-        Base(char **mapa);
+        Base(char **mapa, int tamanhoX, int tamanhoY);
         ~Base();
         Robo* GetRobo(int k);
         void Ativar(int k);
@@ -15,6 +15,8 @@ class Base
 
     private:
         Robo* robos[50];
+        int tamanhoMapaX;
+        int tamanhoMapaY;
         char **mapa;
         int contadorBaseAliens;
         int contadorBaseRecursos;

@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
     } else {
         throw "Erro! Arquivo mapa.txt não foi encontrado";
     }
-    Base base = Base(mapa);
+    Base base = Base(mapa, tamanhoX, tamanhoY);
 
     ifstream arqComandos(argv[2]);
     string linha_comandos;
