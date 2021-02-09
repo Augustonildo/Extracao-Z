@@ -66,3 +66,7 @@ void Base::Retornar(int k){
     contadorBaseRecursos += robos[k]->recursosColetados;
     robos[k]->Limpar();
 }
+
+void Base::ImprimirDadosFinais(){
+    cout << "BASE: TOTAL DE ALIENS " << contadorBaseAliens << " RECURSOS " << contadorBaseRecursos << endl;
+}

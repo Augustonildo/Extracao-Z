@@ -73,6 +73,7 @@ int main() {
                 throw "Erro! Comando desconhecido";
             }
         }
+        base.ImprimirDadosFinais();
         arqComandos.close();
     }else{
         throw "Erro! Arquivo comandos.txt não foi encontrado";

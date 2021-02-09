@@ -11,6 +11,7 @@ class Base
         void Executar(int k);
         void Relatorio(int k);
         void Retornar(int k);
+        void ImprimirDadosFinais();
 
     private:
         Robo* robos[50];
