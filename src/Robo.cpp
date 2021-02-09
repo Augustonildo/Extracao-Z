@@ -14,7 +14,7 @@ Robo::Robo(){
     this->recursosColetados = 0;
     this->hostisEliminados = 0;
     this->historico = "";
-    this->filaComandos = FilaEncadeadaComandos();
+    this->filaComandos = new FilaEncadeadaComandos();
 }
 
 Robo::Robo(int id){
@@ -25,15 +25,19 @@ Robo::Robo(int id){
     this->recursosColetados = 0;
     this->hostisEliminados = 0;
     this->historico = "";
-    this->filaComandos = FilaEncadeadaComandos();
+    this->filaComandos = new FilaEncadeadaComandos();
+}
+
+Robo::~Robo(){
+    delete filaComandos;
 }
 
 void Robo::AdicionarOrdemComando(bool prioridade, Comando comando){
     if(prioridade){
-        filaComandos.InsereComandoPrioritario(comando);
+        filaComandos->InsereComandoPrioritario(comando);
         return;
     }
-    filaComandos.InsereComando(comando);
+    filaComandos->InsereComando(comando);
 }
 
 void Robo::Mover(char **mapa, int x, int y){

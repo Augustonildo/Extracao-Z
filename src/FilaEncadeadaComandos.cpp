@@ -1,7 +1,7 @@
 #include "FilaEncadeadaComandos.hpp"
 
 FilaEncadeadaComandos::FilaEncadeadaComandos(){
-    frente = new CelulaComando;
+    frente = new CelulaComando();
     tras = frente;
     tamanho = 0;
 }
@@ -14,7 +14,6 @@ FilaEncadeadaComandos::~FilaEncadeadaComandos(){
 void FilaEncadeadaComandos::InsereComando(Comando comando){
     CelulaComando *nova = new CelulaComando();
     nova->item = comando;
-    nova->prox = NULL;
     tras->prox = nova;
     tras = nova;
     tamanho++;
@@ -35,6 +34,7 @@ Comando FilaEncadeadaComandos::RemoveComando(){
     if(FilaVazia()){
         throw "Erro! Fila de comandos está vazia";
     }
+
     comando = frente->prox->item;
     primeira = frente;
     frente = frente->prox;
@@ -55,5 +55,6 @@ void FilaEncadeadaComandos::Limpa(){
         delete c;
         c = frente->prox;
     }
+    tamanho = 0;
     tras = frente;
 }

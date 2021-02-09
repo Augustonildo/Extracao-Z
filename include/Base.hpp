@@ -13,7 +13,7 @@ class Base
         void Retornar(int k);
 
     private:
-        Robo robos[50];
+        Robo* robos[50];
         char **mapa;
         int contadorBaseAliens;
         int contadorBaseRecursos;
