@@ -12,6 +12,7 @@ class FilaEncadeadaComandos
 
     private:
         void Limpa();
+        int tamanho;
         CelulaComando *frente;
         CelulaComando *tras;
 };

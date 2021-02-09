@@ -3,6 +3,7 @@
 FilaEncadeadaComandos::FilaEncadeadaComandos(){
     frente = new CelulaComando;
     tras = frente;
+    tamanho = 0;
 }
 
 FilaEncadeadaComandos::~FilaEncadeadaComandos(){
@@ -11,39 +12,39 @@ FilaEncadeadaComandos::~FilaEncadeadaComandos(){
 }
 
 void FilaEncadeadaComandos::InsereComando(Comando comando){
-    CelulaComando *nova;
-    nova = new CelulaComando;
+    CelulaComando *nova = new CelulaComando();
     nova->item = comando;
+    nova->prox = NULL;
     tras->prox = nova;
     tras = nova;
+    tamanho++;
 }
 
 void FilaEncadeadaComandos::InsereComandoPrioritario(Comando comando){
-    CelulaComando *nova;
-    nova = new CelulaComando;
+    CelulaComando *nova = new CelulaComando();
     nova->item = comando;
-    if(frente == tras){
-        tras = nova;
-    }
+    nova->prox = frente->prox;
     frente->prox = nova;
+    tamanho++;
 }
 
 Comando FilaEncadeadaComandos::RemoveComando(){
     CelulaComando *primeira;
-
-    if(frente == tras){
+    Comando comando;
+    
+    if(FilaVazia()){
         throw "Erro! Fila de comandos está vazia";
     }
-
-    Comando comando = frente->prox->item;
+    comando = frente->prox->item;
     primeira = frente;
     frente = frente->prox;
     delete primeira;
+    tamanho--;
     return comando;
 }
 
 bool FilaEncadeadaComandos::FilaVazia(){
-    return frente == tras;
+    return tamanho == 0;
 }
 
 void FilaEncadeadaComandos::Limpa(){
