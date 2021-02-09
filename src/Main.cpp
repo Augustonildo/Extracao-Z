@@ -6,7 +6,8 @@ int main(int argc, char* argv[]) {
     istringstream stream;
 
     if(argc < 3){
-        throw "Erro! Não foram informados os arquivos de texto necessários para a execução do sistema"; 
+        cout << "Erro! Não foram informados os arquivos de texto necessários para a execução do sistema" << endl;
+        return -1;
     }
 
     ifstream arqMapa(argv[1]); 
@@ -33,7 +34,8 @@ int main(int argc, char* argv[]) {
         }
         arqMapa.close();
     } else {
-        throw "Erro! Arquivo mapa.txt não foi encontrado";
+        cout << "Erro! Arquivo " << argv[1] << " não foi encontrado" << endl;
+        return -1;
     }
     Base base = Base(mapa, tamanhoX, tamanhoY);
 
@@ -41,47 +43,55 @@ int main(int argc, char* argv[]) {
     string linha_comandos;
     
     if(arqComandos.is_open()){
-        while(getline(arqComandos, linha_comandos)){
-            stream = istringstream(linha_comandos);
-            string nomeComando, idRobo;
-            stream >> nomeComando;
-            stream >> idRobo;
+        try{
+            while(getline(arqComandos, linha_comandos)){
+                stream = istringstream(linha_comandos);
+                string nomeComando, idRobo;
+                stream >> nomeComando;
+                stream >> idRobo;
 
-            bool comandoPrioritario = false;
-            if(nomeComando[0] == '*'){
-                comandoPrioritario = true;
-                nomeComando.erase(0,1);
-            }
+                bool comandoPrioritario = false;
+                if(nomeComando[0] == '*'){
+                    comandoPrioritario = true;
+                    nomeComando.erase(0,1);
+                }
 
-            if(nomeComando == "ATIVAR"){
-                base.Ativar(atoi(idRobo.c_str()));
-            }else if(nomeComando == "EXECUTAR"){
-                base.Executar(atoi(idRobo.c_str()));
-            }else if(nomeComando == "RELATORIO"){
-                base.Relatorio(atoi(idRobo.c_str()));
-            }else if(nomeComando == "RETORNAR"){
-                base.Retornar(atoi(idRobo.c_str()));
-            }else if(nomeComando == "COLETAR"){
-                base.GetRobo(atoi(idRobo.c_str()))
-                    ->AdicionarOrdemComando(comandoPrioritario, Comando(Coletar));
-            }else if(nomeComando == "ELIMINAR"){
-                base.GetRobo(atoi(idRobo.c_str()))
-                    ->AdicionarOrdemComando(comandoPrioritario, Comando(Eliminar));
-            }else if(nomeComando == "MOVER"){
-                string x, y;
-                stream.ignore(2);
-                getline(stream, x, ',');
-                getline(stream, y, ')');
-                base.GetRobo(atoi(idRobo.c_str()))->AdicionarOrdemComando
-                    (comandoPrioritario, Comando(Mover, atoi(x.c_str()), atoi(y.c_str())));
-            }else{
-                throw "Erro! Comando desconhecido";
+                if(nomeComando == "ATIVAR"){
+                    base.Ativar(atoi(idRobo.c_str()));
+                }else if(nomeComando == "EXECUTAR"){
+                    base.Executar(atoi(idRobo.c_str()));
+                }else if(nomeComando == "RELATORIO"){
+                    base.Relatorio(atoi(idRobo.c_str()));
+                }else if(nomeComando == "RETORNAR"){
+                    base.Retornar(atoi(idRobo.c_str()));
+                }else if(nomeComando == "COLETAR"){
+                    base.GetRobo(atoi(idRobo.c_str()))
+                        ->AdicionarOrdemComando(comandoPrioritario, Comando(Coletar));
+                }else if(nomeComando == "ELIMINAR"){
+                    base.GetRobo(atoi(idRobo.c_str()))
+                        ->AdicionarOrdemComando(comandoPrioritario, Comando(Eliminar));
+                }else if(nomeComando == "MOVER"){
+                    string x, y;
+                    stream.ignore(2);
+                    getline(stream, x, ',');
+                    getline(stream, y, ')');
+                    base.GetRobo(atoi(idRobo.c_str()))->AdicionarOrdemComando
+                        (comandoPrioritario, Comando(Mover, atoi(x.c_str()), atoi(y.c_str())));
+                }else{
+                    string mensagemErro = "Erro! Comando " + nomeComando + " desconhecido"; 
+                    throw mensagemErro;
+                    return -1;
+                }
             }
+        }catch(const string e){
+            cout << e << endl;
+            return -1;
         }
         base.ImprimirDadosFinais();
         arqComandos.close();
     }else{
-        throw "Erro! Arquivo comandos.txt não foi encontrado";
+        cout << "Erro! Arquivo " << argv[2] << " não foi encontrado" << endl;
+        return -1;
     }
     return 0;
 }
