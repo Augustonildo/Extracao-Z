@@ -2,9 +2,14 @@
 #include <fstream>
 #include <sstream>
 
-int main() {
+int main(int argc, char* argv[]) {
     istringstream stream;
-    ifstream arqMapa("mapa.txt"); 
+
+    if(argc < 3){
+        throw "Erro! Não foram informados os arquivos de texto necessários para a execução do sistema"; 
+    }
+
+    ifstream arqMapa(argv[1]); 
     string linha_mapa = "";
     char **mapa;
     int tamanhoX, tamanhoY;
@@ -32,7 +37,7 @@ int main() {
     }
     Base base = Base(mapa);
 
-    ifstream arqComandos("comandos.txt");
+    ifstream arqComandos(argv[2]);
     string linha_comandos;
     
     if(arqComandos.is_open()){
