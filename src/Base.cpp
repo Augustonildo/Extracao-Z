@@ -1,9 +1,11 @@
 #include "Base.hpp"
 
-Base::Base(char **mapa){
+Base::Base(char **mapa, int tamanhoMapaX, int tamanhoMapaY){
     for(int i = 0; i < 50; i++){
         this->robos[i] = new Robo(i);
     }
+    this->tamanhoMapaX = tamanhoMapaX;
+    this->tamanhoMapaY = tamanhoMapaY;
     this->mapa = mapa;
     this->contadorBaseAliens = 0;
     this->contadorBaseRecursos = 0;
@@ -13,6 +15,11 @@ Base::~Base(){
     for(int i = 0; i < 50; i++){
         delete robos[i];
     }
+
+    for(int i = 0; i < tamanhoMapaX; i++){
+        free(mapa[i]);
+    }
+    free(mapa);
 }
 
 Robo* Base::GetRobo(int k){

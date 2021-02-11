@@ -42,37 +42,39 @@ void Robo::AdicionarOrdemComando(bool prioridade, Comando comando){
 
 void Robo::Mover(char **mapa, int x, int y){
     if(mapa[x][y] == 'O'){
-        historico = historico + "ROBO: " + int_to_string(id) + " IMPOSSIVEL MOVER PARA (" +
+        historico = historico + "ROBO " + int_to_string(id) + ": IMPOSSIVEL MOVER PARA (" +
             int_to_string(x) + "," + int_to_string(y) + ")\n";
         return;
     }
     posicaoAtualX = x;
     posicaoAtualY = y;
-    historico = historico + "ROBO: " + int_to_string(id) + " MOVEU PARA (" + 
+    historico = historico + "ROBO " + int_to_string(id) + ": MOVEU PARA (" + 
         int_to_string(x) + "," + int_to_string(y) + ")\n";
 }
 
 void Robo::Eliminar(char **mapa){
     if(mapa[posicaoAtualX][posicaoAtualY] != 'H'){
-        historico = historico + "ROBO: " + int_to_string(id) + " IMPOSSIVEL ELIMINAR ALIEN EM ("
+        historico = historico + "ROBO " + int_to_string(id) + ": IMPOSSIVEL ELIMINAR ALIEN EM ("
             + int_to_string(posicaoAtualX) + "," + int_to_string(posicaoAtualY) + ")\n";
+        return;
     }
 
     hostisEliminados++;
     mapa[posicaoAtualX][posicaoAtualY] = '.';
-    historico = historico + "ROBO: " + int_to_string(id) + " ALIEN ELIMINADO EM ("
+    historico = historico + "ROBO " + int_to_string(id) + ": ALIEN ELIMINADO EM ("
         + int_to_string(posicaoAtualX) + "," + int_to_string(posicaoAtualY) + ")\n";
 }
 
 void Robo::Coletar(char **mapa){
     if(mapa[posicaoAtualX][posicaoAtualY] != 'R'){
-        historico = historico + "ROBO: " + int_to_string(id) + " IMPOSSIVEL COLETAR RECURSOS EM ("
+        historico = historico + "ROBO " + int_to_string(id) + ": IMPOSSIVEL COLETAR RECURSOS EM ("
             + int_to_string(posicaoAtualX) + "," + int_to_string(posicaoAtualY) + ")\n";
+        return;
     }
 
     recursosColetados++;
     mapa[posicaoAtualX][posicaoAtualY] = '.';
-    historico = historico + "ROBO: " + int_to_string(id) + " RECURSOS COLETADOS EM ("
+    historico = historico + "ROBO " + int_to_string(id) + ": RECURSOS COLETADOS EM ("
         + int_to_string(posicaoAtualX) + "," + int_to_string(posicaoAtualY) + ")\n";
 }
 
